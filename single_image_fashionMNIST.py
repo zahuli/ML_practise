@@ -32,8 +32,6 @@ class FashionMNISTModel(nn.Module):
         super(FashionMNISTModel, self).__init__()
         self.flatten = nn.Flatten()
         self.fc1 = nn.Linear(28 * 28, 128)
-        # print(self.fc1.weight)
-        # print(self.fc1.bias)
         self.relu = nn.ReLU()
         self.fc2 = nn.Linear(128, 10)
 
