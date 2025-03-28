@@ -43,71 +43,21 @@ class FashionMNISTModel(nn.Module):
         return x
 
 
-# Instantiate model, loss function, and optimizer
+# Load model and weights
 model = FashionMNISTModel()
-criterion = nn.CrossEntropyLoss()
-optimizer = optim.Adam(model.parameters(), lr=0.001)
+model.load_state_dict(torch.load("fashion_mnist_model.pth"))
+model.eval()  # Set the model to evaluation mode
 
-# Train the model
-epochs = 3
-for epoch in range(epochs):
-    total_loss = 0.0
-    num_batches = len(train_loader)
-    for images, labels in train_loader:
-        optimizer.zero_grad()
-        outputs = model(images)
-        loss = criterion(outputs, labels)
-        loss.backward()
-        optimizer.step()
-        total_loss += loss.item()
-    avg_loss = total_loss / num_batches  # Average loss per batch
-    print(f'Epoch {epoch + 1}/{epochs}, Average Loss: {avg_loss:.4f}')
-
-# Evaluate the model
-correct = 0
-total = 0
-with torch.no_grad():
-    for images, labels in test_loader:
-        outputs = model(images)
-        _, predicted = torch.max(outputs, 1)
-        total += labels.size(0)
-        correct += (predicted == labels).sum().item()
-
-accuracy = correct / total
-print(f'Test Accuracy: {accuracy:.4f}')
-
-
-# Predict on a single image from the test set
 
 # Select an image from the test dataset
-sample_idx = 10  # Change this index to test different images
+sample_idx = 13  # Change this index to test different images
 image, label = test_dataset[sample_idx]
 
 # Prepare the image for the model
 image_tensor = image.unsqueeze(0)  # Add batch dimension
 
-# Get the model prediction
-model.eval()  # Set the model to evaluation mode
-with torch.no_grad():
-    output = model(image_tensor)
-    predicted_label = torch.argmax(output, dim=1).item()
-
-# Display the image with the predicted label
-plt.imshow(image.squeeze(), cmap='gray')
-plt.title(
-    f'Predicted: {class_labels[predicted_label]}, Actual: {class_labels[label]}')
-plt.axis('off')
-plt.show()
-
-
-sample_idx = 15  # Change this index to test different images
-image, label = test_dataset[sample_idx]
-
-# Prepare the image for the model
-image_tensor = image.unsqueeze(0)  # Add batch dimension
 
 # Get the model prediction
-model.eval()  # Set the model to evaluation mode
 with torch.no_grad():
     output = model(image_tensor)
     predicted_label = torch.argmax(output, dim=1).item()

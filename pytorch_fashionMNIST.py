@@ -80,6 +80,9 @@ for epoch in range(epochs):
     avg_loss = total_loss / num_batches  # Average loss per batch
     print(f'Epoch {epoch + 1}/{epochs}, Average Loss: {avg_loss:.4f}')
 
+# Save model's weights
+torch.save(model.state_dict(), "fashion_mnist_model.pth")
+
 # Evaluate the model
 correct = 0
 total = 0
