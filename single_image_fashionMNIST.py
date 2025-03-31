@@ -50,7 +50,7 @@ model.eval()  # Set the model to evaluation mode
 
 
 # Select an image from the test dataset
-sample_idx = 13  # Change this index to test different images
+sample_idx = 23  # Change this index to test different images
 image, label = test_dataset[sample_idx]
 
 # Prepare the image for the model

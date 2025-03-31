@@ -55,7 +55,7 @@ optimizer = optim.Adam(model.parameters(), lr=0.001)
 train_accuracies = []
 
 # Train the model
-epochs = 10
+epochs = 5
 for epoch in range(epochs):
     total_loss = 0.0
     num_batches = len(train_loader)

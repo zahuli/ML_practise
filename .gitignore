@@ -176,3 +176,6 @@ cython_debug/
 
 # FashionMNIST data
 data/
+
+# ML data
+*.pth
